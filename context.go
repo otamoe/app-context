@@ -1,24 +1,17 @@
 package context
 
-import (
-	"context"
+import "context"
 
-	"go.uber.org/fx"
-)
+var defaultContext = context.Context)
 
-func New(mctx context.Context) (fxOption fx.Option) {
-	if mctx == nil {
-		mctx = context.Background()
-	}
-	fxOption = fx.Provide(func(lc fx.Lifecycle) context.Context {
-		ctx, cancel := context.WithCancel(mctx)
-		lc.Append(fx.Hook{
-			OnStop: func(_ context.Context) error {
-				cancel()
-				return nil
-			},
-		})
-		return ctx
-	})
-	return
+func init() {
+	defaultContext = context.Background()
+}
+
+
+func SetContext(ctx context.Context) {
+	defaultContext = ctx
+}
+func GetContext() context.Context {
+	return defaultContext
 }
