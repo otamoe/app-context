@@ -2,16 +2,16 @@ package context
 
 import "context"
 
-var defaultContext = context.Context)
+var Context = context.Context)
 
 func init() {
-	defaultContext = context.Background()
+	Context = context.Background()
 }
 
 
 func SetContext(ctx context.Context) {
-	defaultContext = ctx
+	Context = ctx
 }
 func GetContext() context.Context {
-	return defaultContext
+	return Context
 }
